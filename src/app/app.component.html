@@ -1,0 +1,60 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>AutoExclusive</h1>
+</div>
+<h2>Made by Tsapaev Egor ;)</h2>
+
+<!--Форма добавления -->
+<div id="formAdd">
+    <h4>Добавить автомобиль:</h4>
+  <form [formGroup]="registerForm" (ngSubmit)="save()">
+    <span>Название</span>
+    <input id="_name" type="text" formControlName="name"><br>
+    <div *ngIf="registerForm.get('name').touched">
+      <div *ngIf="registerForm.hasError('required',['name'])">
+        Это поле обязательно
+      </div>
+    </div>
+    <span>Год выпуска</span>
+    <input id="_year" type="text" formControlName="year"><br>
+    <div *ngIf="registerForm.get('year').touched">
+      <div *ngIf="registerForm.hasError('required',['year'])">
+        Это поле обязательно
+      </div>
+    </div>
+    <span>Гос.номер</span>
+    <input id="_plate" type="text" formControlName="plate" placeholder="a123aa00"><br>
+    <div *ngIf="registerForm.get('plate').touched">
+      <div *ngIf="registerForm.hasError('required',['plate'])">
+        Это поле обязательно
+      </div>
+      <div *ngIf="registerForm.hasError('pattern',['plate'])">
+        Введите корректный номер
+      </div>
+    </div>
+    <input id="save" type="submit" value="Добавить" [disabled]="registerForm.invalid">
+  </form>
+</div>
+<!--Список автомобилей -->
+<div id="carList">
+    <div class="product" *ngFor="let car of cars | orderBy:this.order | filter:this.plate; let i = index ">
+      <input class="carDelete" type="image" value="Удалить" src="assets/images/remove.png" (click)="deleteCar(i)" >
+      <h4 class="carName">{{car.name}}</h4>
+        <p class="content">Год выпуска: {{car.year}}</p>
+        <p class="content">Гос. номер: {{car.plate}}</p>
+    </div>
+</div>
+
+<!--Блок сортировки и фильтрации -->
+<div id="change">
+  <div id="sort">
+    <span>Сортировать:</span>
+    <div *ngFor="let item of item">
+      <input type="radio" [(ngModel)]="order" value="{{item.value}}">{{item.display}}
+    </div>
+  </div>
+  <div id="filter">
+    <span>Серийный номер:</span>
+    <input type="text" [(ngModel)]="plate">
+  </div>
+</div>
