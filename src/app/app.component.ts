@@ -22,8 +22,26 @@ export class AppComponent {
   ){}
 
   ngOnInit() {
+    let array=[
+      {
+        name: 'Mitsubishi Lancer',
+        year: 2008,
+        plate: 'а394вк98',
+      },
+      {
+        name: 'Reno Logan',
+        year: 2010,
+        plate: 'б336вd98',
+      },
+      {
+        name: 'Chevrolet Lachetti',
+        year: 2017,
+        plate: 'ш894вт90',
+      }
+    ];
     let localStorageItem=JSON.parse(localStorage.getItem("cars"));
-    this.cars=localStorageItem==null?[]:localStorageItem;
+    this.cars=localStorageItem==null||[]?array:localStorageItem;
+    console.log(localStorageItem);
 
     this.registerForm=this.formBuilder.group({
       name:['',[Validators.required]],
