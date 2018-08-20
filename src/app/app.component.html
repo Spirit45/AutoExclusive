@@ -37,7 +37,7 @@
 </div>
 <!--Список автомобилей -->
 <div id="carList">
-    <div class="product" *ngFor="let car of cars | orderBy:this.order | filter:this.plate; let i = index ">
+    <div class="product" *ngFor="let car of cars | filter:this.plate | orderBy:this.order ; let i = index ">
       <input class="carDelete" type="image" value="Удалить" src="assets/images/remove.png" (click)="deleteCar(i)" >
       <h4 class="carName">{{car.name}}</h4>
         <p class="content">Год выпуска: {{car.year}}</p>

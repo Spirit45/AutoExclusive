@@ -23,8 +23,7 @@ export class AppComponent {
 
   ngOnInit() {
     let localStorageItem=JSON.parse(localStorage.getItem("cars"));
-    this.cars=localStorageItem;
-    console.log(localStorageItem.cars);
+    this.cars=localStorageItem==null?[]:localStorageItem;
 
     this.registerForm=this.formBuilder.group({
       name:['',[Validators.required]],
@@ -42,11 +41,7 @@ export class AppComponent {
   save (): void{
     this.cars.push(this.registerForm.value);
     localStorage.setItem('cars', JSON.stringify(this.cars));
-    this.registerForm=this.formBuilder.group({
-      name:'',
-      year:null,
-      plate:'',
-    });
+    this.registerForm.reset();
   }
 
   deleteCar (i){
