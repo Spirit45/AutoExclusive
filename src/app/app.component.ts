@@ -41,7 +41,6 @@ export class AppComponent {
     ];
     let localStorageItem=JSON.parse(localStorage.getItem("cars"));
     this.cars=localStorageItem==null||[]?array:localStorageItem;
-    console.log(localStorageItem);
 
     this.registerForm=this.formBuilder.group({
       name:['',[Validators.required]],
